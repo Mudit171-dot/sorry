@@ -22,8 +22,24 @@ export default function Home() {
   const [showChoice, setShowChoice] = useState(false)
   const [showPleaseMessage, setShowPleaseMessage] = useState(false)
 
+  useEffect(() => {
+    const audio = document.getElementById('bg-music') as HTMLAudioElement
+    if (audio) {
+      if (isMusicPlaying) {
+        audio.play().catch(err => console.log('Audio play failed:', err))
+      } else {
+        audio.pause()
+      }
+    }
+  }, [isMusicPlaying])
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#f5e6f0] via-[#f0e6ff] to-[#fff5e6] overflow-hidden">
+      {/* Background Music */}
+      <audio id="bg-music" loop>
+        <source src="/music/romantic-soundtrack.mp3" type="audio/mpeg" />
+      </audio>
+
       {/* Floating Hearts Background */}
       <FloatingHearts />
       <GlowingParticles />
@@ -41,7 +57,7 @@ export default function Home() {
       <div className="min-h-screen w-full flex flex-col items-center justify-center">
         <div className="text-center px-4 animate-fade-in">
           <h1 className="text-7xl md:text-8xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-300 to-pink-300 animate-pulse-slow"
-            style={{ fontFamily: 'Dancing Script, cursive' }}
+            style={{ fontFamily: 'Dancing Script, cursive', lineHeight: '1.3', paddingBottom: '0.2em' }}
           >
             I'm Sorry Roktima
           </h1>
