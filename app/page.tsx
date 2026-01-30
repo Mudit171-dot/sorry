@@ -21,20 +21,6 @@ export default function Home() {
   const [showForgivenessMessage, setShowForgivenessMessage] = useState(false)
   const [showChoice, setShowChoice] = useState(false)
   const [showPleaseMessage, setShowPleaseMessage] = useState(false)
-  const [currentSection, setCurrentSection] = useState(0)
-
-  useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      if (e.deltaY > 0 && currentSection < 5) {
-        setTimeout(() => setCurrentSection(currentSection + 1), 500)
-      } else if (e.deltaY < 0 && currentSection > 0) {
-        setTimeout(() => setCurrentSection(currentSection - 1), 500)
-      }
-    }
-
-    window.addEventListener('wheel', handleWheel, { passive: true })
-    return () => window.removeEventListener('wheel', handleWheel)
-  }, [currentSection])
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#f5e6f0] via-[#f0e6ff] to-[#fff5e6] overflow-hidden">
@@ -52,10 +38,7 @@ export default function Home() {
       </button>
 
       {/* Section 1: Opening Screen */}
-      <div
-        className={`min-h-screen w-full flex flex-col items-center justify-center transition-all duration-1000 ${currentSection >= 0 ? 'opacity-100' : 'opacity-0'
-          }`}
-      >
+      <div className="min-h-screen w-full flex flex-col items-center justify-center">
         <div className="text-center px-4 animate-fade-in">
           <h1 className="text-7xl md:text-8xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-300 to-pink-300 animate-pulse-slow"
             style={{ fontFamily: 'Dancing Script, cursive' }}
@@ -70,10 +53,7 @@ export default function Home() {
       </div>
 
       {/* Section 2: Apology Message */}
-      <div
-        className={`min-h-screen w-full flex flex-col items-center justify-center px-4 transition-all duration-1000 ${currentSection >= 1 ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
-      >
+      <div className="min-h-screen w-full flex flex-col items-center justify-center px-4">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-12 text-pink-500">
             Please forgive me 🥺
@@ -88,10 +68,7 @@ export default function Home() {
       </div>
 
       {/* Section 3: Why You Mean So Much To Me */}
-      <div
-        className={`min-h-screen w-full flex flex-col items-center justify-center px-4 py-20 transition-all duration-1000 ${currentSection >= 2 ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
-      >
+      <div className="min-h-screen w-full flex flex-col items-center justify-center px-4 py-20">
         <h2 className="text-4xl md:text-5xl font-bold mb-16 text-purple-500">
           Please Try to understand babiee..!!
         </h2>
@@ -115,10 +92,7 @@ export default function Home() {
       </div>
 
       {/* Section 4: A Promise */}
-      <div
-        className={`min-h-screen w-full flex flex-col items-center justify-center px-4 py-20 transition-all duration-1000 ${currentSection >= 3 ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
-      >
+      <div className="min-h-screen w-full flex flex-col items-center justify-center px-4 py-20">
         <h2 className="text-4xl md:text-5xl font-bold mb-16 text-peach-500" style={{ color: '#FFB88C' }}>
           A Promise
         </h2>
@@ -142,10 +116,7 @@ export default function Home() {
 
 
       {/* Section 5: Final Button & Forgiveness Message */}
-      <div
-        className={`min-h-screen w-full flex flex-col items-center justify-center px-4 transition-all duration-1000 ${currentSection >= 4 ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
-      >
+      <div className="min-h-screen w-full flex flex-col items-center justify-center px-4">
         {!showChoice && !showForgivenessMessage ? (
           <div className="text-center">
             <p className="text-2xl md:text-3xl text-gray-700 mb-12 font-medium">
@@ -240,12 +211,7 @@ export default function Home() {
         )}
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 pointer-events-none">
-        <div className="text-center text-gray-500 text-sm">
-          {currentSection < 5 ? 'Scroll for more' : ''}
-        </div>
-      </div>
+
 
       {/* Custom Animations */}
       <style>{`
